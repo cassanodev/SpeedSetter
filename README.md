@@ -24,30 +24,17 @@ The script's behavior can be customized through the `config.lua` file. Below are
 ```lua
 Config = {}
 
--- Refresh time in seconds between each check for burst tires
-Config.RefreshTime = 0.5
+-- General Settings
+Config.RefreshTime = 0.5          -- Refresh time between checks (in seconds)
+Config.UsePercent = false         -- Use percentage of max speed instead of absolute speed
+Config.defaultSpeed = 20          -- Default speed if no index is found
+Config.useMph = false             -- If true, MPH will be used; if false, KM/H will be used
 
--- Use percentage of max speed instead of a fixed speed
-Config.UsePercent = false
-
--- Default speed to be used if no tire burst index is found
-Config.defaultSpeed = 20
-
--- Percent of max speed when different numbers of tires are flat
-Config.tyresBurstPercent = {
-    [1] = 80, -- 1 tire flat
-    [2] = 60, -- 2 tires flat
-    [3] = 40, -- 3 tires flat
-    [4] = 20, -- 4 tires flat
+-- Speed Settings (based on burst tires count)
+Config.tyresBurst = {
+    -- If `UsePercent` is true, the percentage is used; otherwise, absolute speed is used.
+    [1] = {percent = 80, speed = 80},   -- 1 tire burst
+    [2] = {percent = 60, speed = 60},   -- 2 tires burst
+    [3] = {percent = 40, speed = 40},   -- 3 tires burst
+    [4] = {percent = 20, speed = 20},   -- 4 tires burst
 }
-
--- Speed in KM/H or MPH when a specific number of tires are flat
-Config.tyresBurstSet = {
-    [1] = 80,  -- Speed for 1 tire flat
-    [2] = 60,  -- Speed for 2 tires flat
-    [3] = 40,  -- Speed for 3 tires flat
-    [4] = 20,  -- Speed for 4 tires flat
-}
-
--- Set whether to use MPH instead of KM/H (false for KM/H)
-Config.useMph = false
